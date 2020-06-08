@@ -46,6 +46,7 @@ sheets = db.Collector(of_class='ViewSheet', is_not_type=True).get_elements()
 for sheet in sheets:
     print(sheet)
     print(sheet.name)
+    print(sheet.ViewType)
 
 # RPW db.ViewSheet
 """
