@@ -40,7 +40,6 @@ def sheet_selection():
 
 
 def get_sheet_number(sheet, new_sheet, sheet_order_dict):
-    
     sheet_num = sheet.SheetNumber
     sheet_category = sheet_num[:2]
     new_sheet_order = int(sheet_order_dict[str(sheet_category)]) + 1
@@ -56,7 +55,7 @@ def get_sheet_number(sheet, new_sheet, sheet_order_dict):
 def create_new_sheet(sheet, sheet_order_dict):
     source_param_dict = {}
 
-    with revit.Transaction('Create Sheet'):
+    with db.Transaction('Create Sheet'):
         new_sheet = DB.ViewSheet.Create(
             doc,
             DB.ElementId.InvalidElementId
@@ -87,7 +86,6 @@ def create_new_sheet(sheet, sheet_order_dict):
                     param.Set(source_param_dict[param.Id])
     return sheet_order_dict, new_sheet
 
-
 def duplicate_sheet_contents(sheet, new_sheet):
     copy_element_ids = []
 
@@ -96,7 +94,39 @@ def duplicate_sheet_contents(sheet, new_sheet):
         is_not_type=True
     ).get_elements()
     for element in elements_on_sheet:
-        if not isinstance(element.unwrap(), DB.Viewport):
+        if isinstance(element.unwrap(), DB.Viewport):
+            related_view = doc.GetElement(element.ViewId)
+            if related_view.ViewType == DB.ViewType.DraftingView:
+                print(related_view)
+                with db.Transaction('Duplicate DraftingView'):
+                    new_view_id = DB.ViewDrafting.Duplicate(DB.ViewDuplicateOption.WithDetailing)
+                    new_view = doc.GetElement(new_view_id)
+                    new_view.Scale = related_view.Scale
+                    nvport = DB.Viewport.Create(
+                        doc,
+                        new_sheet.Id,
+                        new_view_Id,
+                        element.GetBoxCenter())
+
+            elif related_view.ViewType == DB.ViewType.Legend:
+                with db.Transaction('Duplicate DraftingView'):
+                    nvport = DB.Viewport.Create(
+                            doc,
+                            new_sheet.Id,
+                            related_view.Id,
+                            element.GetBoxCenter())
+            else:
+                with db.Transaction('Duplicat0e View'):
+                    new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.Duplicate)
+                    new_view = doc.GetElement(new_view_id)
+                    new_view.Scale = related_view.Scale
+                    nvport = DB.Viewport.Create(
+                        doc,
+                        new_sheet.Id,
+                        new_view.Id,
+                        element.GetBoxCenter())
+
+        else:
             copy_element_ids.append(element.Id)
     if copy_element_ids:
         with revit.Transaction('Copy View Contents'):
@@ -116,10 +146,10 @@ def main():
 
     with revit.TransactionGroup('Create Sheet'):
         for sheet in sheet_list:
-        
+
             sheet_order_dict, new_sheet = create_new_sheet(sheet, sheet_order_dict)
             duplicate_sheet_contents(sheet, new_sheet)
-
+            
 
 if __name__ == "__main__":
     main()
