@@ -86,6 +86,7 @@ def create_new_sheet(sheet, sheet_order_dict):
                     param.Set(source_param_dict[param.Id])
     return sheet_order_dict, new_sheet
 
+
 def duplicate_sheet_contents(sheet, new_sheet):
     copy_element_ids = []
 
@@ -97,34 +98,28 @@ def duplicate_sheet_contents(sheet, new_sheet):
         if isinstance(element.unwrap(), DB.Viewport):
             related_view = doc.GetElement(element.ViewId)
             if related_view.ViewType == DB.ViewType.DraftingView:
-                print(related_view)
                 with db.Transaction('Duplicate DraftingView'):
-                    new_view_id = DB.ViewDrafting.Duplicate(DB.ViewDuplicateOption.WithDetailing)
+                    new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.WithDetailing)
                     new_view = doc.GetElement(new_view_id)
                     new_view.Scale = related_view.Scale
-                    nvport = DB.Viewport.Create(
-                        doc,
-                        new_sheet.Id,
-                        new_view_Id,
-                        element.GetBoxCenter())
 
             elif related_view.ViewType == DB.ViewType.Legend:
-                with db.Transaction('Duplicate DraftingView'):
-                    nvport = DB.Viewport.Create(
-                            doc,
-                            new_sheet.Id,
-                            related_view.Id,
-                            element.GetBoxCenter())
+                new_view_id = related_view.Id
             else:
-                with db.Transaction('Duplicat0e View'):
-                    new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.Duplicate)
+                with db.Transaction('Duplicate View'):
+                    new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.WithDetailing)
                     new_view = doc.GetElement(new_view_id)
-                    new_view.Scale = related_view.Scale
-                    nvport = DB.Viewport.Create(
+                    elements_on_sheet = db.Collector(
+                        view=sheet.Id,
+                        is_not_type=True).get_elements()
+            with db.Transaction('Duplicate DraftingView'):
+                nvport = DB.Viewport.Create(
                         doc,
                         new_sheet.Id,
-                        new_view.Id,
+                        new_view_id,
                         element.GetBoxCenter())
+                if nvport.GetTypeId() != element.GetTypeId():
+                    nvport.ChangeTypeId(element.GetTypeId())
 
         else:
             copy_element_ids.append(element.Id)
