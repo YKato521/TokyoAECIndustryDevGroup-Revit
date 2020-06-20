@@ -97,22 +97,13 @@ def duplicate_sheet_contents(sheet, new_sheet):
     for element in elements_on_sheet:
         if isinstance(element.unwrap(), DB.Viewport):
             related_view = doc.GetElement(element.ViewId)
-            if related_view.ViewType == DB.ViewType.DraftingView:
-                with db.Transaction('Duplicate DraftingView'):
-                    new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.WithDetailing)
-                    new_view = doc.GetElement(new_view_id)
-                    new_view.Scale = related_view.Scale
-
-            elif related_view.ViewType == DB.ViewType.Legend:
+            if related_view.ViewType == DB.ViewType.Legend:
                 new_view_id = related_view.Id
             else:
                 with db.Transaction('Duplicate View'):
                     new_view_id = related_view.Duplicate(DB.ViewDuplicateOption.WithDetailing)
-                    new_view = doc.GetElement(new_view_id)
-                    elements_on_sheet = db.Collector(
-                        view=sheet.Id,
-                        is_not_type=True).get_elements()
-            with db.Transaction('Duplicate DraftingView'):
+
+            with db.Transaction('Change View Port Type'):
                 nvport = DB.Viewport.Create(
                         doc,
                         new_sheet.Id,
