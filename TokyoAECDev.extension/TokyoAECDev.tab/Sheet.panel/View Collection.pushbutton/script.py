@@ -18,10 +18,10 @@ commandData.Application => __revit__
 
 
 # C#
-def colection_original():   
-    uiapp = __revit__
+def colection_original():
+    uiapp = __revit__ # noqa F821
     uidoc = uiapp.ActiveUIDocument
-    app = uiapp.Application
+    app = uiapp.Application # noqa F841
     doc = uidoc.Document
 
     sheets = (

@@ -4,8 +4,6 @@ from rpw import db, ui, doc
 from pyrevit import revit
 from System.Collections.Generic import List
 
-# RPW WrappedElement
-
 
 def get_sheet_order_dict():
     sheet_order_dict = {}
@@ -27,7 +25,7 @@ def get_sheet_order_dict():
 def sheet_selection():
     sheet_list = []
 
-    elements = ui.Selection()    
+    elements = ui.Selection()
     for el in elements:
         if isinstance(el, db.ViewSheet):
             sheet_list.append(el)
@@ -62,7 +60,6 @@ def create_new_sheet(sheet, sheet_order_dict):
         )
         new_sheet.Name = 'Test'
         sheet_order_dict = get_sheet_number(sheet, new_sheet, sheet_order_dict)
-        
         for param in sheet.GetOrderedParameters():
             if not param.IsReadOnly:
                 if param.StorageType == DB.StorageType.String:
@@ -75,8 +72,8 @@ def create_new_sheet(sheet, sheet_order_dict):
         for param in new_sheet.GetOrderedParameters():
             if (
                 param.Definition.BuiltInParameter != DB.BuiltInParameter.SHEET_NUMBER
-                and  param.Definition.BuiltInParameter != DB.BuiltInParameter.SHEET_NAME
-                and param.Id in source_param_dict):
+                and param.Definition.BuiltInParameter != DB.BuiltInParameter.SHEET_NAME
+                and param.Id in source_param_dict): # noqa E125
                 if param.StorageType == DB.StorageType.String:
                     try:
                         param.Set(source_param_dict[param.Id].decode('utf-8'))
@@ -124,18 +121,3 @@ def duplicate_sheet_contents(sheet, new_sheet):
                 None
             )
     return new_contents
-
-
-def main():
-    sheet_order_dict = get_sheet_order_dict()
-    sheet_list = sheet_selection()
-
-    with revit.TransactionGroup('Create Sheet'):
-        for sheet in sheet_list:
-
-            sheet_order_dict, new_sheet = create_new_sheet(sheet, sheet_order_dict)
-            duplicate_sheet_contents(sheet, new_sheet)
-            
-
-if __name__ == "__main__":
-    main()
