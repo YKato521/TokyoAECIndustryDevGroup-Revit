@@ -16,42 +16,54 @@ commandData.Application => __revit__
 
 """
 
-# C#
-"""
-uiapp = __revit__
-uidoc = uiapp.ActiveUIDocument
-app = uiapp.Application
-doc = uidoc.Document
 
-sheets = (
-    DB.FilteredElementCollector(doc)
-    .OfClass(DB.ViewSheet)
-    .WhereElementIsNotElementType()
-    .ToElements())
-for sheet in sheets:
-    print(sheet)
-    print(sheet.Name)
-"""
+# C#
+def colection_original():   
+    uiapp = __revit__
+    uidoc = uiapp.ActiveUIDocument
+    app = uiapp.Application
+    doc = uidoc.Document
+
+    sheets = (
+        DB.FilteredElementCollector(doc)
+        .OfClass(DB.ViewSheet)
+        .WhereElementIsNotElementType()
+        .ToElements())
+    for sheet in sheets:
+        print(sheet)
+        print(sheet.Name)
+
 
 # RPW UnwrappedElement
+def collection_unwrapped():
+    sheets = db.Collector(of_class='ViewSheet', is_not_type=True)
+    for sheet in sheets:
+        print(sheet)
+        print(sheet.Name)
 
-sheets = db.Collector(of_class='ViewSheet', is_not_type=True)
-for sheet in sheets:
-    print(sheet)
-    print(sheet.Name)
 
 # RPW WrappedElement
-"""
-sheets = db.Collector(of_class='ViewSheet', is_not_type=True).get_elements()
-for sheet in sheets:
-    print(sheet)
-    print(sheet.name)
-"""
+def collection_wrapped():
+    sheets = db.Collector(of_class='ViewSheet', is_not_type=True).get_elements()
+    for sheet in sheets:
+        print(sheet)
+        print(sheet.name)
+
 
 # RPW db.ViewSheet
-"""
-sheets = db.ViewSheet.collect()
-for sheet in sheets:
-    print(sheet)
-    print(sheet.Name)
-"""
+def collection_view():
+    sheets = db.ViewSheet.collect()
+    for sheet in sheets:
+        print(sheet)
+        print(sheet.Name)
+
+
+def main():
+    # colection_original()
+    collection_unwrapped()
+    # collection_wrapped()
+    # collection_view()
+
+
+if __name__ == "__main__":
+    main()
