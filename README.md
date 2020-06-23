@@ -41,5 +41,5 @@ Revit Dev Contents
  [参考リンク](https://www.notion.so/Install-Extensions-0753ab78c0ce46149f962acc50892491)  
  設定するパスの例
  ```
- C:\Users\[Users]\Documents\Github\TokyoAECIndustryDevGroup-Revit
+ C:\Users\[UserName]\Documents\Github\TokyoAECIndustryDevGroup-Revit
  ```
