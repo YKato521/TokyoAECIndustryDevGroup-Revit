@@ -2,10 +2,10 @@
 Revit Dev Contents
 
 ## 0. はじめに
--Autodesk Revitのエクステンションのコードサンプルとなります。
--Revit2020でのみ動作テストをしています。
--なお、本エクステンションはRUG Japanが提供しているsample architectureモデルでのみ動作をテストしています。
--独自のファイルで使用する場合にはコードのアップデートが必要となります。
+ - Autodesk Revitのエクステンションのコードサンプルとなります。
+ - Revit2020でのみ動作テストをしています。
+ - なお、本エクステンションはRUG Japanが提供しているsample architectureモデルでのみ動作をテストしています。
+ - 独自のファイルで使用する場合にはコードのアップデートが必要となります。
 
 ## 1. 参考
 - [Revit API Docs](https://www.revitapidocs.com/2020/)
