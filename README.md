@@ -5,13 +5,15 @@ Revit Dev Contents
  - Autodesk Revitのエクステンションのコードサンプルとなります。
  - Revit2020でのみ動作テストをしています。
  - なお、本エクステンションはRUG Japanが提供しているsample architectureモデルでのみ動作をテストしています。
- - 独自のファイルで使用する場合にはコードのアップデートが必要となります。
+ - 独自のファイルで使用する場合にはコードのアップデートが必要となる場合があります。
 
 ## 1. 参考
 - [Revit API Docs](https://www.revitapidocs.com/2020/)
 - [pyRevit](https://www.notion.so/pyrevitlabs/pyRevit-bd907d6292ed4ce997c46e84b6ef67a0)
 - [Revit Python Wrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
 - [IronPython Stubs](https://github.com/gtalarico/ironpython-stubs)
+- [revitron](https://revitron.readthedocs.io/en/latest/get-started.html)
+- [revitron for revit python shell](https://github.com/YKato521/revitron-for-RevitPythonShell)
 
 ## 2. 設定
 ### 2.1 pyRevit
