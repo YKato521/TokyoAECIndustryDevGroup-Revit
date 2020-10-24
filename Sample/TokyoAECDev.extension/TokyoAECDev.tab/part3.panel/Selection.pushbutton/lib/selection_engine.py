@@ -107,6 +107,9 @@ class selectionEngine(object):
                     category_dict[el.Category.Name].append(el)
         selected_cat_els = SelectFromList("Select By Category", category_dict, exit_on_close=True)
         for selected_el in selected_cat_els:
+            for param in el.Symbol.GetOrderedParameters():
+                if param.Definition.Name not in param_list:
+                    param_list.append(param.Definition.Name)
             for param in  selected_el.GetOrderedParameters():
                 if param.Definition.Name not in param_list:
                     param_list.append(param.Definition.Name)
