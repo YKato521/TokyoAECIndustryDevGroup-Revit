@@ -1,6 +1,7 @@
 from Autodesk.Revit.DB import BuiltInParameter, FamilyInstance
 from revitron import Selection, DOC, _
 from rpw.ui.forms import SelectFromList
+from pyrevit.forms import select_parameters
 
 
 class selectionEngine(object):
@@ -93,18 +94,33 @@ class selectionEngine(object):
             selection.set(form)
     
     def select_by_param(self):
+        category_dict = {}
         select_dict = {}
         param_list = []
         selection = Selection()
         els = selection.get()
         for el in els:
-            param = _(el).get('Comments')
-            
-            #try:
-            #    param = el.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS).AsString()
-            #except:
-            #    param = None
-            
+            if isinstance(el, FamilyInstance):
+                if el.Category.Name not in category_dict.keys():
+                    category_dict[el.Category.Name] = [el]
+                else:
+                    category_dict[el.Category.Name].append(el)
+        selected_cat_els = SelectFromList("Select By Category", category_dict, exit_on_close=True)
+        for selected_el in selected_cat_els:
+            for param in  selected_el.GetOrderedParameters():
+                if param.Definition.Name not in param_list:
+                    param_list.append(param.Definition.Name)
+        param_name = SelectFromList("Select By Parameter", param_list, exit_on_close=True)
+        """
+        select_parameters(
+            el,
+            title='Select Parameters',
+            multiple=True,
+            include_instance=True,
+            include_type=False)
+        """
+        for el in selected_cat_els:
+            param = _(el).get(param_name)
             if param not in select_dict.keys():
                 select_dict[param] = [el.Id]
             else:
@@ -112,7 +128,7 @@ class selectionEngine(object):
                     select_dict[param].append(el.Id)
                 else:
                     select_dict[param] = [el.Id]
-        form = SelectFromList("Select By Comments", select_dict, exit_on_close=True)
+        form = SelectFromList("Select By {}".format(param_name), select_dict, exit_on_close=True)
         if form is not None:
             selection.set(form)
 
