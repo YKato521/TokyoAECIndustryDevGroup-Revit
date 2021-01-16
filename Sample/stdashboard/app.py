@@ -28,11 +28,14 @@ def get_levels():
 			columns = ['Level Name','Elevation'])
 		return chart_data
 @st.cache
-def get_furnitures():
+def get_furnitures(option):
 	url = BASE_URL + 'furniture'
 	res= requests.get(url)
 	if res.status_code == 200:
-		furniture_dict = res.json()
+		if option == 'ファミリ':
+			furniture_dict = res.json()['family']
+		elif option == 'ファミリタイプ':
+			furniture_dict = res.json()['family_type']
 		chart_data = pd.DataFrame(
 			furniture_dict.values(),
 			index=furniture_dict.keys())
@@ -40,9 +43,11 @@ def get_furnitures():
 
 
 
-st.title(get_title())
+# st.title(get_title())
 st.subheader(" レベル表 ")
-st.dataframe(get_levels())
+# st.dataframe(get_levels())
 st.subheader(" 家具ファミリ別 ")
-st.bar_chart(get_furnitures())
-
+option = st.selectbox(
+	'集計分類',
+	('ファミリ', 'ファミリタイプ'))
+st.bar_chart(get_furnitures(option))

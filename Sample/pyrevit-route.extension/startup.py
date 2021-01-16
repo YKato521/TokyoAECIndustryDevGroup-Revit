@@ -30,9 +30,18 @@ def get_furnitures(doc):
 		of_category='Furniture',
 		is_not_type=True).get_elements()
 	furniture_dict = {}
-	for w in furnitures:
-		if w.Symbol.FamilyName in furniture_dict.keys():
-			furniture_dict[w.Symbol.FamilyName] += 1 
+	furniture_type_dict = {}
+	for f in furnitures:
+		if f.Symbol.FamilyName in furniture_dict.keys():
+			furniture_dict[f.Symbol.FamilyName] += 1 
 		else:
-			furniture_dict[w.Symbol.FamilyName] = 1
-	return routes.make_response(data=furniture_dict)
+			furniture_dict[f.Symbol.FamilyName] = 1
+		if f.Symbol.FamilyName + ' - ' + f.name in furniture_type_dict.keys():
+			furniture_type_dict[f.Symbol.FamilyName + ' - ' + f.name] += 1
+		else:
+			furniture_type_dict[f.Symbol.FamilyName + ' - ' + f.name] = 1
+		family_dict = {
+			'family': furniture_dict,
+			'family_type': furniture_type_dict
+			}
+	return routes.make_response(data=family_dict)
