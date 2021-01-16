@@ -43,9 +43,9 @@ def get_furnitures(option):
 
 
 
-# st.title(get_title())
+st.title(get_title())
 st.subheader(" レベル表 ")
-# st.dataframe(get_levels())
+st.dataframe(get_levels())
 st.subheader(" 家具ファミリ別 ")
 option = st.selectbox(
 	'集計分類',
