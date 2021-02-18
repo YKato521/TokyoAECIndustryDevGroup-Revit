@@ -1,0 +1,6 @@
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\bin\Debug\OgreOut.pushbutton.dll
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\bin\Debug\OgreOut.pushbutton.pdb
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\obj\Debug\OgreOut.pushbutton.csprojAssemblyReference.cache
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\obj\Debug\OgreOut.pushbutton.csproj.CoreCompileInputs.cache
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\obj\Debug\OgreOut.pushbutton.dll
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreOut.pushbutton\obj\Debug\OgreOut.pushbutton.pdb

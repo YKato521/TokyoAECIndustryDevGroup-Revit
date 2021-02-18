@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command OgreOut.pushbutton</Text>
+    <Description>Some description for OgreOut.pushbutton</Description>
+    <Assembly>OgreOut.pushbutton.dll</Assembly>
+    <FullClassName>OgreOut.pushbutton.Command</FullClassName>
+    <ClientId>35995e38-25ca-4adb-8bd5-cd682bcf630b</ClientId>
+    <VendorId>com.terapad.redtechlab</VendorId>
+    <VendorDescription>RED Tech Lab</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application OgreOut.pushbutton</Name>
+    <Assembly>OgreOut.pushbutton.dll</Assembly>
+    <FullClassName>OgreOut.pushbutton.App</FullClassName>
+    <ClientId>4ff3f016-1cdf-49ed-b5c4-ce6f70efdc2b</ClientId>
+    <VendorId>com.terapad.redtechlab</VendorId>
+    <VendorDescription>RED Tech Lab</VendorDescription>
+  </AddIn>
+</RevitAddIns>

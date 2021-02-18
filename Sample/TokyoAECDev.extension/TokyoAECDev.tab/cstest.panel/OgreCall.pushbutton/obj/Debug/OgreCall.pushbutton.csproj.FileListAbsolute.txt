@@ -1,0 +1,6 @@
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\bin\Debug\OgreCall.pushbutton.dll
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\bin\Debug\OgreCall.pushbutton.pdb
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\obj\Debug\OgreCall.pushbutton.csprojAssemblyReference.cache
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\obj\Debug\OgreCall.pushbutton.csproj.CoreCompileInputs.cache
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\obj\Debug\OgreCall.pushbutton.dll
+D:\Users\yushi\Documents\GitHub\TokyoAECIndustryDevGroup-Revit\TokyoAECDev.extension\TokyoAECDev.tab\cstest.panel\OgreCall.pushbutton\obj\Debug\OgreCall.pushbutton.pdb

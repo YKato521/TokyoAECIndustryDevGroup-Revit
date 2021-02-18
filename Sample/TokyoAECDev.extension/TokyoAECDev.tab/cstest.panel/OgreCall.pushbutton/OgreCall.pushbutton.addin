@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command OgreCall.pushbutton</Text>
+    <Description>Some description for OgreCall.pushbutton</Description>
+    <Assembly>OgreCall.pushbutton.dll</Assembly>
+    <FullClassName>OgreCall.pushbutton.Command</FullClassName>
+    <ClientId>0cd9415a-31dd-47e0-bc6e-542efa7a7a90</ClientId>
+    <VendorId>com.terapad.redtechlab</VendorId>
+    <VendorDescription>RED Tech Lab</VendorDescription>
+  </AddIn>
+</RevitAddIns>
